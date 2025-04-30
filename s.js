@@ -1,4 +1,3 @@
-
 function fillGrid() {
 	for(let i = 0; i < gridSize; i++) {
 		grid.push([])
@@ -60,6 +59,15 @@ function crossOut(g) {
 				}
 				c ++;
 				blob = 0;
+			}
+			if(j + 1 === g.length) {
+			    if(g[i][j]) {
+			        c++
+			    }
+			    if(pattern[0][i].length !== c) {
+			        match = false;
+			        break;
+			    }
 			}
 		}
 		if(match) {
