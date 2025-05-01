@@ -80,6 +80,14 @@ function crossOut(g) {
 	}
 }
 
+function intersection(i, a, b, s) {
+    if(2*s > b-a){
+        for(let i = b-s; i < a + s + 1; i++){
+            
+        }    
+    }
+}
+
 let grid = []
 
 let pattern = []
