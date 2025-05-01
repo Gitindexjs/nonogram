@@ -1,8 +1,16 @@
-function fillGrid() {
+function fillGrid(m) {
+    
 	for(let i = 0; i < gridSize; i++) {
-		grid.push([])
+	    if(grid.length < i+1) {
+		    grid.push([])
+	        
+	    }
 		for(let j = 0; j < gridSize; j++) {
-			grid[i][j] = Math.floor(Math.random() * 2)
+		    if(m == true) {
+			    grid[i][j] = Math.floor(Math.random() * 2)
+		    } else {
+		        grid[i][j] = 0;
+		    }
 		}
 	}
 }
@@ -82,10 +90,21 @@ function crossOut(g) {
 
 function intersection(i, a, b, s) {
     if(2*s > b-a){
-        for(let i = b-s; i < a + s + 1; i++){
-            
-        }    
+        for(let j = b-s+1; j < a + s + 1; j++){
+            grid[i][j] = 1
+        }
     }
+}
+
+function comparePattern(i, patch) {
+    let differences = patch.length - pattern[i].length;
+    if(patch.length - pattern[i].length !== 0){
+        return differences;
+    }
+    for(let j = 0; j < pattern[i].length; j++) {
+        differences += pattern[i][j] - patch[j]
+    }
+    return differences;
 }
 
 let grid = []
@@ -94,16 +113,16 @@ let pattern = []
 
 let gridSize = 5;
 
-let scratch = []
+let patches = []
 
-fillGrid();
+let scratch = []
+fillGrid(true);
 console.log(grid)
 console.log("===============")
-console.log(encodePattern(grid))
 pattern = encodePattern(grid)
+console.log(pattern)
 console.log("===============")
-hideAway(grid)
+fillGrid(false)
 console.log(grid)
-console.log("===============")
-crossOut(grid)
-console.log(grid)
+let c = encodePattern(grid)
+console.log(c)
